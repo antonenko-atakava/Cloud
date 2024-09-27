@@ -1,0 +1,14 @@
+C:\Users\vgama\RiderProjects\Cloud\Cloud.Domain\bin\Debug\net8.0\Cloud.Domain.deps.json
+C:\Users\vgama\RiderProjects\Cloud\Cloud.Domain\bin\Debug\net8.0\Cloud.Domain.runtimeconfig.json
+C:\Users\vgama\RiderProjects\Cloud\Cloud.Domain\bin\Debug\net8.0\Cloud.Domain.dll
+C:\Users\vgama\RiderProjects\Cloud\Cloud.Domain\bin\Debug\net8.0\Cloud.Domain.pdb
+C:\Users\vgama\RiderProjects\Cloud\Cloud.Domain\obj\Debug\net8.0\Cloud.Domain.csproj.AssemblyReference.cache
+C:\Users\vgama\RiderProjects\Cloud\Cloud.Domain\obj\Debug\net8.0\Cloud.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\vgama\RiderProjects\Cloud\Cloud.Domain\obj\Debug\net8.0\Cloud.Domain.AssemblyInfoInputs.cache
+C:\Users\vgama\RiderProjects\Cloud\Cloud.Domain\obj\Debug\net8.0\Cloud.Domain.AssemblyInfo.cs
+C:\Users\vgama\RiderProjects\Cloud\Cloud.Domain\obj\Debug\net8.0\Cloud.Domain.csproj.CoreCompileInputs.cache
+C:\Users\vgama\RiderProjects\Cloud\Cloud.Domain\obj\Debug\net8.0\Cloud.Domain.dll
+C:\Users\vgama\RiderProjects\Cloud\Cloud.Domain\obj\Debug\net8.0\refint\Cloud.Domain.dll
+C:\Users\vgama\RiderProjects\Cloud\Cloud.Domain\obj\Debug\net8.0\Cloud.Domain.pdb
+C:\Users\vgama\RiderProjects\Cloud\Cloud.Domain\obj\Debug\net8.0\Cloud.Domain.genruntimeconfig.cache
+C:\Users\vgama\RiderProjects\Cloud\Cloud.Domain\obj\Debug\net8.0\ref\Cloud.Domain.dll
