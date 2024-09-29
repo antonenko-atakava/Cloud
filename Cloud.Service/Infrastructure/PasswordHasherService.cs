@@ -9,12 +9,17 @@ public class PasswordHasherService
     {
         using (SHA256 sha256 = SHA256.Create())
         {
-            string saltedPassword = password + salt;
+            string saltedPassword = $"{password}::{salt}";
             
-            byte[] saltedPasswordBytes = Encoding.UTF8.GetBytes(saltedPassword);
-            byte[] hashBytes = sha256.ComputeHash(saltedPasswordBytes);
-            
-            return Convert.ToBase64String(hashBytes);
+            byte[] bytes = Encoding.UTF8.GetBytes(saltedPassword);
+            byte[] hash = sha256.ComputeHash(bytes);
+
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < hash.Length; i++)
+            {
+                sb.Append(hash[i].ToString("x2"));
+            }
+            return sb.ToString();
         }
     }
 }

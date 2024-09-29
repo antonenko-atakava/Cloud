@@ -16,6 +16,8 @@ public class UserRepository : IUserRepository
     public async Task<User?> Get(Guid id)
     {
         return await _db.Users
+            .Include(i => i.UserRoles)!
+            .ThenInclude(i => i.Role)
             .AsNoTrackingWithIdentityResolution()
             .FirstOrDefaultAsync(i => i.Id == id);
     }
@@ -24,6 +26,8 @@ public class UserRepository : IUserRepository
     {
         return await _db.Users
             .AsNoTrackingWithIdentityResolution()
+            .Include(i => i.UserRoles)!
+            .ThenInclude(i => i.Role)
             .FirstOrDefaultAsync(x => x.Login == name);
     }
 
@@ -31,6 +35,8 @@ public class UserRepository : IUserRepository
     {
         return await _db.Users
             .AsNoTrackingWithIdentityResolution()
+            .Include(i => i.UserRoles)!
+            .ThenInclude(i => i.Role)
             .FirstOrDefaultAsync(x => x.Email == email);
     }
 
@@ -38,6 +44,8 @@ public class UserRepository : IUserRepository
     {
         return await _db.Users
             .AsNoTrackingWithIdentityResolution()
+            .Include(i => i.UserRoles)!
+            .ThenInclude(i => i.Role)
             .FirstOrDefaultAsync(x => x.Phone == phone);
     }
 
@@ -45,6 +53,8 @@ public class UserRepository : IUserRepository
     {
         return await _db.Users
             .AsNoTrackingWithIdentityResolution()
+            .Include(i => i.UserRoles)!
+            .ThenInclude(i => i.Role)
             .ToListAsync();
     }
 
@@ -53,6 +63,8 @@ public class UserRepository : IUserRepository
         return await _db.Users
             .Skip(((int)number * (int)size) - 1)
             .Take((int)size)
+            .Include(i => i.UserRoles)!
+            .ThenInclude(i => i.Role)
             .AsNoTrackingWithIdentityResolution()
             .ToListAsync();
     }
@@ -61,6 +73,13 @@ public class UserRepository : IUserRepository
     {
         await _db.Users.AddAsync(user);
         return user;
+    }
+
+    public async Task<User?> Login(string login, string password)
+    {
+        return await _db.Users
+            .AsNoTrackingWithIdentityResolution()
+            .FirstOrDefaultAsync(i => i.Login == login && i.Password == password);
     }
 
     public User Update(User user)

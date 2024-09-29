@@ -1,11 +1,10 @@
 namespace Cloud.Domain.Entity;
 
-public class UserPolicy
+public class UserRole
 {
     public Guid UserId { get; set; }
-    public Guid PolicyId { get; set; }
-
     public virtual User User { get; set; }
 
-    public virtual Policy Policy { get; set; }
+    public Guid RoleId { get; set; }
+    public virtual Role Role { get; set; }
 }

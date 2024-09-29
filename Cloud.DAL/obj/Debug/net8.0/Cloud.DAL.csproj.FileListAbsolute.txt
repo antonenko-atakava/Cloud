@@ -15,3 +15,4 @@ C:\Users\vgama\RiderProjects\Cloud\Cloud.DAL\obj\Debug\net8.0\refint\Cloud.DAL.d
 C:\Users\vgama\RiderProjects\Cloud\Cloud.DAL\obj\Debug\net8.0\Cloud.DAL.pdb
 C:\Users\vgama\RiderProjects\Cloud\Cloud.DAL\obj\Debug\net8.0\Cloud.DAL.genruntimeconfig.cache
 C:\Users\vgama\RiderProjects\Cloud\Cloud.DAL\obj\Debug\net8.0\ref\Cloud.DAL.dll
+C:\Users\vgama\RiderProjects\Cloud\Cloud.DAL\obj\Debug\net8.0\Cloud.DAL.sourcelink.json

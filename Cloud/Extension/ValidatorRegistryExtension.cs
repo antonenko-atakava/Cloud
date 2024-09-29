@@ -1,9 +1,13 @@
 using Cloud.Domain.Http.Request.Policy;
+using Cloud.Domain.Http.Request.Role;
+using Cloud.Domain.Http.Request.RolePolicy;
 using Cloud.Domain.Http.Request.User;
-using Cloud.Domain.Http.Request.UserPolicy;
+using Cloud.Domain.Http.Request.UserRole;
 using Cloud.Validator.Policy;
+using Cloud.Validator.Role;
+using Cloud.Validator.RolePolicy;
 using Cloud.Validator.User;
-using Cloud.Validator.UserPolicy;
+using Cloud.Validator.UserRole;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 
@@ -22,10 +26,17 @@ public static class ValidatorRegistryExtension
         services.AddScoped(typeof(IValidator<GetPolicyRequest>), typeof(GetPolicyValidator));
         services.AddScoped(typeof(IValidator<GetByNamePolicyRequest>), typeof(GetByNamePolicyValidator));
         services.AddScoped(typeof(IValidator<DeletePolicyRequest>), typeof(DeletePolicyValidator));
+        
+        services.AddScoped<IValidator<CreateRolePolicyRequest>, CreateRolePolicyValidator>();
+        services.AddScoped(typeof(IValidator<DeleteRolePolicyRequest>), typeof(DeleteRolePolicyValidator));
 
-        services.AddScoped(typeof(IValidator<CreateUserPolicyRequest>), typeof(CreateUserPolicyValidator));
-        services.AddScoped(typeof(IValidator<DeleteUserPolicyRequest>), typeof(DeleteUserPolicyValidator));
+        services.AddScoped(typeof(IValidator<GetRoleRequest>), typeof(GetRoleValidator));
+        services.AddScoped(typeof(IValidator<CreateRoleRequest>), typeof(CreateRoleValidator));
+        services.AddScoped(typeof(IValidator<DeleteRolePolicyRequest>), typeof(DeleteRolePolicyValidator));
 
+        services.AddScoped(typeof(IValidator<CreateUserRoleRequest>), typeof(CreateUserRoleValidator));
+        services.AddScoped(typeof(IValidator<DeleteUserRoleRequest>), typeof(DeleteUserRoleValidator));
+        
         return services;
     }
 }

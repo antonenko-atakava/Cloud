@@ -7,12 +7,18 @@ namespace Cloud.Controller;
 [Route("api/[controller]/[action]")]
 public abstract class MainController : ControllerBase
 {
-    protected IUserService UserService => 
+    protected IUserService UserService =>
         HttpContext.RequestServices.GetRequiredService<IUserService>();
-    
-    protected IPolicyService PolicyService => 
+
+    protected IPolicyService PolicyService =>
         HttpContext.RequestServices.GetRequiredService<IPolicyService>();
-    
-    protected IUserPolicyService UserPolicyService =>
-        HttpContext.RequestServices.GetRequiredService<IUserPolicyService>();
+
+    protected IRolePolicyService RolePolicyService =>
+        HttpContext.RequestServices.GetRequiredService<IRolePolicyService>();
+
+    protected IRoleService RoleService =>
+        HttpContext.RequestServices.GetRequiredService<IRoleService>();
+
+    protected IUserRoleService UserRoleService =>
+        HttpContext.RequestServices.GetRequiredService<IUserRoleService>();
 }

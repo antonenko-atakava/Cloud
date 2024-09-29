@@ -17,3 +17,4 @@ C:\Users\vgama\RiderProjects\Cloud\Cloud.Service\obj\Debug\net8.0\refint\Cloud.S
 C:\Users\vgama\RiderProjects\Cloud\Cloud.Service\obj\Debug\net8.0\Cloud.Service.pdb
 C:\Users\vgama\RiderProjects\Cloud\Cloud.Service\obj\Debug\net8.0\Cloud.Service.genruntimeconfig.cache
 C:\Users\vgama\RiderProjects\Cloud\Cloud.Service\obj\Debug\net8.0\ref\Cloud.Service.dll
+C:\Users\vgama\RiderProjects\Cloud\Cloud.Service\obj\Debug\net8.0\Cloud.Service.sourcelink.json

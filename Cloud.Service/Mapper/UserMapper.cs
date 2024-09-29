@@ -27,8 +27,7 @@ public class UserMapper : Profile
             .ForMember(dest => dest.Salt, opt => opt.Ignore())
             .ForMember(dest => dest.Modified, opt => opt.MapFrom(_ => DateTime.UtcNow))
             .ForMember(dest => dest.Created, opt => opt.MapFrom(_ => DateTime.UtcNow))
-            .ForMember(dest => dest.IsSuperUser, opt => opt.MapFrom(src => false))
-            .ForMember(dest => dest.UserPolicies, opt => opt.Ignore());;
+            .ForMember(dest => dest.IsSuperUser, opt => opt.MapFrom(src => false));
 
         CreateMap<UpdateUserRequest, User>()
             .ForAllMembers(options => options.Condition((src, dest, srcMember) => srcMember != null));

@@ -10,7 +10,8 @@ public interface IUserRepository : IBaseRepository
     Task<User?> GetByPhone(string phone);
     Task<IEnumerable<User>> SelectAll();
     Task<IEnumerable<User>> Pagination(uint number, uint size);
-    Task<User> Create(User user);
+    Task<User> Create(User entity);
+    Task<User?> Login(string email, string password);
     User Update(User user);
     bool Delete(User user);
 }

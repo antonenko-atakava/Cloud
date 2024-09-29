@@ -7,5 +7,5 @@ public class Policy
 {
     public Guid Id { get; set; }
     public string Name { get; set; }
-    public virtual ICollection<UserPolicy>? UserPolicies { get; set; }   
+    public virtual ICollection<RolePolicy>? RolePolicies { get; set; }
 }

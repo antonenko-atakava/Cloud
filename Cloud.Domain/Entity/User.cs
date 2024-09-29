@@ -12,5 +12,5 @@ public class User
     public DateTime Created { get; set; }
     public DateTime Modified { get; set; }
     public bool IsSuperUser { get; set; }
-    public virtual ICollection<UserPolicy>? UserPolicies { get; set; }
+    public virtual ICollection<UserRole>? UserRoles { get; set; }
 }

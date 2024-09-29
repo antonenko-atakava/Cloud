@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Cloud.DAL.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240924191546_Initial")]
+    [Migration("20240929041208_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -44,6 +44,41 @@ namespace Cloud.DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("policy", (string)null);
+                });
+
+            modelBuilder.Entity("Cloud.Domain.Entity.Role", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("roles", (string)null);
+                });
+
+            modelBuilder.Entity("Cloud.Domain.Entity.RolePolicy", b =>
+                {
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("role_id");
+
+                    b.Property<Guid>("PolicyId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("policy_id");
+
+                    b.HasKey("RoleId", "PolicyId");
+
+                    b.HasIndex("PolicyId");
+
+                    b.ToTable("role_policies", (string)null);
                 });
 
             modelBuilder.Entity("Cloud.Domain.Entity.User", b =>
@@ -99,53 +134,79 @@ namespace Cloud.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("users", (string)null);
                 });
 
-            modelBuilder.Entity("Cloud.Domain.Entity.UserPolicy", b =>
+            modelBuilder.Entity("Cloud.Domain.Entity.UserRole", b =>
                 {
                     b.Property<Guid>("UserId")
                         .HasColumnType("uuid")
                         .HasColumnName("user_id");
 
-                    b.Property<Guid>("PolicyId")
+                    b.Property<Guid>("RoleId")
                         .HasColumnType("uuid")
-                        .HasColumnName("policy_id");
+                        .HasColumnName("role_id");
 
-                    b.HasKey("UserId", "PolicyId");
+                    b.HasKey("UserId", "RoleId");
 
-                    b.HasIndex("PolicyId");
+                    b.HasIndex("RoleId");
 
-                    b.ToTable("user_policies", (string)null);
+                    b.ToTable("user_role", (string)null);
                 });
 
-            modelBuilder.Entity("Cloud.Domain.Entity.UserPolicy", b =>
+            modelBuilder.Entity("Cloud.Domain.Entity.RolePolicy", b =>
                 {
                     b.HasOne("Cloud.Domain.Entity.Policy", "Policy")
-                        .WithMany("UserPolicies")
+                        .WithMany("RolePolicies")
                         .HasForeignKey("PolicyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Cloud.Domain.Entity.User", "User")
-                        .WithMany("UserPolicies")
-                        .HasForeignKey("UserId")
+                    b.HasOne("Cloud.Domain.Entity.Role", "Role")
+                        .WithMany("RolePolicies")
+                        .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Policy");
+
+                    b.Navigation("Role");
+                });
+
+            modelBuilder.Entity("Cloud.Domain.Entity.UserRole", b =>
+                {
+                    b.HasOne("Cloud.Domain.Entity.Role", "Role")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Cloud.Domain.Entity.User", "User")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Role");
 
                     b.Navigation("User");
                 });
 
             modelBuilder.Entity("Cloud.Domain.Entity.Policy", b =>
                 {
-                    b.Navigation("UserPolicies");
+                    b.Navigation("RolePolicies");
+                });
+
+            modelBuilder.Entity("Cloud.Domain.Entity.Role", b =>
+                {
+                    b.Navigation("RolePolicies");
+
+                    b.Navigation("UserRoles");
                 });
 
             modelBuilder.Entity("Cloud.Domain.Entity.User", b =>
                 {
-                    b.Navigation("UserPolicies");
+                    b.Navigation("UserRoles");
                 });
 #pragma warning restore 612, 618
         }

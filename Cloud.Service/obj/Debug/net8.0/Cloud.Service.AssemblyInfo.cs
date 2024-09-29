@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Cloud.Service")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d30a76e915bf1ad7b2c507ca4b3314555a9afa12")]
 [assembly: System.Reflection.AssemblyProductAttribute("Cloud.Service")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Cloud.Service")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

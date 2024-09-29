@@ -1,5 +1,4 @@
 using System.Security.Claims;
-using Cloud.DAL;
 using Cloud.DAL.Database;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
@@ -22,26 +21,47 @@ public class CustomCookieAuthenticationEvents : CookieAuthenticationEvents
                 return;
             }
 
-            var claim = identity.FindFirst(CustomClaimTypes.Identifier)?.Type;
+            var claim = identity.FindFirst(CustomClaimTypes.Identifier)?.Value;
 
             var userId = Guid.Parse(claim ?? throw new InvalidOperationException());
 
-            var user = await db.Users.FirstOrDefaultAsync(i => i.Id == userId);
+            var user = await db.Users
+                .Include(u => u.UserRoles)!
+                .ThenInclude(ur => ur.Role)
+                .FirstOrDefaultAsync(i => i.Id == userId);
 
             if (user == null)
                 throw new NullReferenceException(nameof(user));
 
-            var policies = await db.UserPolicies
-                .Where(i => i.UserId == userId)
-                .Include(userPolicy => userPolicy.Policy)
-                .ToListAsync();
+            var policies = new List<string>();
+
+            if (user.UserRoles == null)
+                throw new NullReferenceException(nameof(user));
+            
+            foreach (var role in user.UserRoles)
+            {
+                var rolePolicies = await db.RolePolicies
+                    .Where(i => i.RoleId == role.RoleId)
+                    .Include(up => up.Policy)
+                    .ToListAsync();
+
+                foreach (var rolePolicy in rolePolicies)
+                {
+                    policies.Add(rolePolicy.Policy.Name);
+                }
+            }
+
+            // var policies = await db.UserPolicies
+            //     .Where(i => i.UserId == userId)
+            //     .Include(userPolicy => userPolicy.Policy)
+            //     .ToListAsync();
 
             identity = new ClaimsIdentity(identity, new[]
             {
-                new Claim(CustomClaimTypes.Policy, string.Join(";", policies.Select(p => p.Policy.Name))),
+                new Claim(CustomClaimTypes.Policy, string.Join(";", policies)),
                 new Claim(CustomClaimTypes.SuperUser, user.IsSuperUser.ToString())
             });
-            
+
             context.ReplacePrincipal(new ClaimsPrincipal(identity));
         }
         catch

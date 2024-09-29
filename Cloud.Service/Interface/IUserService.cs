@@ -12,6 +12,7 @@ public interface IUserService
     Task<ICollection<BaseUserResponse>> SelectAll();
     Task<ICollection<BaseUserResponse>> Pagination(uint number, uint size);
     Task<BaseUserResponse> Create(CreateUserRequest request);
+    Task<Guid> Login(string login, string password);
     Task<BaseUserResponse> Update(UpdateUserRequest request);
     Task<BaseUserResponse> UpdateAvatar(UpdateAvatarUserRequest request);
     Task<bool> Delete(DeleteUserRequest request);

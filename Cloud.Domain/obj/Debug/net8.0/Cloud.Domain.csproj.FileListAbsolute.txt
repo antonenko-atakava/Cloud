@@ -12,3 +12,4 @@ C:\Users\vgama\RiderProjects\Cloud\Cloud.Domain\obj\Debug\net8.0\refint\Cloud.Do
 C:\Users\vgama\RiderProjects\Cloud\Cloud.Domain\obj\Debug\net8.0\Cloud.Domain.pdb
 C:\Users\vgama\RiderProjects\Cloud\Cloud.Domain\obj\Debug\net8.0\Cloud.Domain.genruntimeconfig.cache
 C:\Users\vgama\RiderProjects\Cloud\Cloud.Domain\obj\Debug\net8.0\ref\Cloud.Domain.dll
+C:\Users\vgama\RiderProjects\Cloud\Cloud.Domain\obj\Debug\net8.0\Cloud.Domain.sourcelink.json

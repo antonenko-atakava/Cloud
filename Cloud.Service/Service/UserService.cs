@@ -94,14 +94,14 @@ public class UserService : IUserService
         if (existingUserByEmail != null)
         {
             _logger.LogError($"[User Service || Create]: Пользователь c почтой ' {request.Email}' уже существует");
-            throw new InvalidOperationException($"Пользователь c почтой '{request.Email}' уже существует");
+            throw new Exception($"[User Service || Create]: Пользователь c почтой '{request.Email}' уже существует");
         }
 
         var existingUserByLogin = await _repository.GetByName(request.Login);
         if (existingUserByLogin != null)
         {
             _logger.LogError($"[User Service || Create]: Пользователь c логином '{request.Login}' уже существует");
-            throw new InvalidOperationException($"Пользователь c логином '{request.Login}' уже существует");
+            throw new Exception($"[User Service || Create]: Пользователь c логином '{request.Login}' уже существует");
         }
 
         var user = _mapper.Map<User>(request);
@@ -109,14 +109,38 @@ public class UserService : IUserService
         var salt = Guid.NewGuid();
 
         user.Salt = salt.ToString();
-        user.Password = PasswordHasherService.HashPassword(user.Password, salt.ToString());
+        user.Password = request.Password;
+        
+        user.Password = PasswordHasherService.HashPassword(user.Password, user.Salt);
 
         await _repository.Create(user);
         await _repository.SaveAsync();
 
         Console.WriteLine(user);
-        
+
         return _mapper.Map<BaseUserResponse>(user);
+    }
+
+    public async Task<Guid> Login(string login, string password)
+    {
+        var user = await _repository.GetByName(login);
+
+        if (user == null)
+        {
+            _logger.LogError($"[User Service || Login]: Пользователя c логином '{login}' не существует");
+            throw new Exception($"[User Service || Login]: Пользователя c логином '{login}' не существует");
+        }
+
+        var passwordHash = PasswordHasherService.HashPassword(password, user.Salt);
+        var verifyUser = await _repository.Login(login, passwordHash);
+
+        if (verifyUser == null)
+        {
+            _logger.LogError($"[User Service || Login]: не верный логин или пароль");
+            throw new Exception($"[User Service || Login]: не верный логин или пароль");
+        }
+
+        return user.Id;
     }
 
     public async Task<BaseUserResponse> Update(UpdateUserRequest request)

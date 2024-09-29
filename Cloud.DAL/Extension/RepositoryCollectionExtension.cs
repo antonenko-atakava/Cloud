@@ -11,7 +11,11 @@ public static class RepositoryCollectionExtension
     {
         services.AddScoped<IPolicyRepository, PolicyRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
-        services.AddScoped<IUserPolicyRepository, UserPolicyRepository>();
+        
+        services.AddScoped<IRolePolicyRepository, RolePolicyRepository>();
+        services.AddScoped<IRoleRepository, RoleRepository>();
+        
+        services.AddScoped<IUserRoleRepository, UserRoleRepository>();
 
         services.AddDbContext<DatabaseContext>();
 

@@ -116,3 +116,4 @@ C:\Users\vgama\RiderProjects\Cloud\Cloud\obj\Debug\net8.0\Cloud.pdb
 C:\Users\vgama\RiderProjects\Cloud\Cloud\obj\Debug\net8.0\Cloud.genruntimeconfig.cache
 C:\Users\vgama\RiderProjects\Cloud\Cloud\obj\Debug\net8.0\ref\Cloud.dll
 C:\Users\vgama\RiderProjects\Cloud\Cloud\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Users\vgama\RiderProjects\Cloud\Cloud\obj\Debug\net8.0\Cloud.sourcelink.json

@@ -24,7 +24,19 @@ namespace Cloud.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Users",
+                name: "roles",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    name = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_roles", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "users",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -40,50 +52,85 @@ namespace Cloud.DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.id);
+                    table.PrimaryKey("PK_users", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "user_policies",
+                name: "role_policies",
                 columns: table => new
                 {
-                    user_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    role_id = table.Column<Guid>(type: "uuid", nullable: false),
                     policy_id = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_user_policies", x => new { x.user_id, x.policy_id });
+                    table.PrimaryKey("PK_role_policies", x => new { x.role_id, x.policy_id });
                     table.ForeignKey(
-                        name: "FK_user_policies_Users_user_id",
-                        column: x => x.user_id,
-                        principalTable: "Users",
+                        name: "FK_role_policies_policy_policy_id",
+                        column: x => x.policy_id,
+                        principalTable: "policy",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_user_policies_policy_policy_id",
-                        column: x => x.policy_id,
-                        principalTable: "policy",
+                        name: "FK_role_policies_roles_role_id",
+                        column: x => x.role_id,
+                        principalTable: "roles",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "user_role",
+                columns: table => new
+                {
+                    user_id = table.Column<Guid>(type: "uuid", nullable: false),
+                    role_id = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_user_role", x => new { x.user_id, x.role_id });
+                    table.ForeignKey(
+                        name: "FK_user_role_roles_role_id",
+                        column: x => x.role_id,
+                        principalTable: "roles",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_user_role_users_user_id",
+                        column: x => x.user_id,
+                        principalTable: "users",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_user_policies_policy_id",
-                table: "user_policies",
+                name: "IX_role_policies_policy_id",
+                table: "role_policies",
                 column: "policy_id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_user_role_role_id",
+                table: "user_role",
+                column: "role_id");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "user_policies");
+                name: "role_policies");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "user_role");
 
             migrationBuilder.DropTable(
                 name: "policy");
+
+            migrationBuilder.DropTable(
+                name: "roles");
+
+            migrationBuilder.DropTable(
+                name: "users");
         }
     }
 }
