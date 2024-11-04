@@ -17,10 +17,10 @@ public class RolePolicyController : MainController
         await RolePolicyService.Create(rolePolicy);
         return Ok("Политики успешно добавлены к роли");
     }
-
+ 
     [HttpDelete]
     [Authorize(Policy = Policies.REMOVE_POLICY_OF_ROLE)]
-    public async Task<IActionResult> RemoveRolePolicy([FromBody] DeleteRolePolicyRequest rolePolicy)
+    public async Task<IActionResult> RemoveRolePolicy([FromQuery] DeleteRolePolicyRequest rolePolicy)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);

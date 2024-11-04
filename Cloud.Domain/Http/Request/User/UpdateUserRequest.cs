@@ -6,6 +6,4 @@ public class UpdateUserRequest
     public string? Login { get; set; }
     public string? Email { get; set; }
     public string? Phone { get; set; }
-    public DateTime Created { get; set; }
-    public DateTime Modified { get; set; }
 }

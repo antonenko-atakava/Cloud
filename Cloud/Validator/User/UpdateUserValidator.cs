@@ -3,9 +3,9 @@ using FluentValidation;
 
 namespace Cloud.Validator.User;
 
-public class UpdateUserRequestValidator : AbstractValidator<UpdateUserRequest>
+public class UpdateUserValidator : AbstractValidator<UpdateUserRequest>
 {
-    public UpdateUserRequestValidator()
+    public UpdateUserValidator()
     {
         RuleFor(x => x.Id)
             .NotEmpty().WithMessage("Идентификатор пользователя не должен быть пустым.");

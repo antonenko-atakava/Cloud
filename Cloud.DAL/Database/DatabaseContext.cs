@@ -18,6 +18,10 @@ public class DatabaseContext : DbContext
     public DbSet<Role> Roles { get; set; }
     public DbSet<RolePolicy> RolePolicies { get; set; }
     public DbSet<UserRole> UserRoles { get; set; }
+    public DbSet<CustomDirectory> Directories { get; set; }
+    public DbSet<Company> Companies { get; set; }
+    public DbSet<CompanyRole> CompanyRoles { get; set; }
+    public DbSet<UserCompany> UserCompanies { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {

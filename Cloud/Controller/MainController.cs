@@ -21,4 +21,10 @@ public abstract class MainController : ControllerBase
 
     protected IUserRoleService UserRoleService =>
         HttpContext.RequestServices.GetRequiredService<IUserRoleService>();
+
+    protected ICompanyService CompanyService =>
+        HttpContext.RequestServices.GetRequiredService<ICompanyService>();
+
+    protected IDirectoryService DirectoryService
+        => HttpContext.RequestServices.GetRequiredService<IDirectoryService>();
 }

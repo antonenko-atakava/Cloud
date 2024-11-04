@@ -2,11 +2,11 @@ using Microsoft.AspNetCore.Http;
 
 namespace Cloud.Service.Infrastructure;
 
-public class FileService
+public class ImageService
 {
     private readonly IHttpContextAccessor _httpContextAccessor;
 
-    public FileService(IHttpContextAccessor httpContextAccessor)
+    public ImageService(IHttpContextAccessor httpContextAccessor)
     {
         _httpContextAccessor = httpContextAccessor;
     }
@@ -24,7 +24,7 @@ public class FileService
         using var stream = new FileStream(filePath, FileMode.Create);
         await file.CopyToAsync(stream);
 
-        string host = _httpContextAccessor.HttpContext.Request.Host.Value;
+        string host = _httpContextAccessor.HttpContext!.Request.Host.Value;
         return $"{host}/image/{file.FileName}";
     }
 }

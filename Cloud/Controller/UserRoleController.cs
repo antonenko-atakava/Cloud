@@ -20,7 +20,7 @@ public class UserRoleController : MainController
 
     [HttpDelete]
     [Authorize(Policy = Policies.USERS_REMOVE_ROLE)]
-    public async Task<IActionResult> RemoveUserRole([FromBody] DeleteUserRoleRequest request)
+    public async Task<IActionResult> RemoveUserRole([FromQuery] DeleteUserRoleRequest request)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);

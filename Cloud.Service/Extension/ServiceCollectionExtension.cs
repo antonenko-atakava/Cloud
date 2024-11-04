@@ -10,7 +10,7 @@ public static class ServiceCollectionExtension
 {
     public static IServiceCollection AddCloudService(this IServiceCollection services)
     {
-        services.AddScoped<FileService>();
+        services.AddScoped<ImageService>();
 
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<IPolicyService, PolicyService>();
@@ -19,6 +19,9 @@ public static class ServiceCollectionExtension
         services.AddScoped<IRoleService, RoleService>();
 
         services.AddScoped<IUserRoleService, UserRoleService>();
+        services.AddScoped<ICompanyService, CompanyService>();
+
+        services.AddScoped<IDirectoryService, DirectoryService>();
 
         return services;
     }

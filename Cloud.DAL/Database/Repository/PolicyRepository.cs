@@ -21,21 +21,21 @@ public class PolicyRepository : IPolicyRepository
     public async Task<Policy?> Get(Guid id)
     {
         return await _db.Policies
-            .AsNoTrackingWithIdentityResolution()
+            .AsNoTracking()
             .FirstOrDefaultAsync(i => i.Id == id);
     }
 
     public async Task<Policy?> GetByName(string name)
     {
         return await _db.Policies
-            .AsNoTrackingWithIdentityResolution()
+            .AsNoTracking()
             .FirstOrDefaultAsync(i => i.Name == name);
     }
 
     public async Task<ICollection<Policy>> SelectAll()
     {
         return await _db.Policies
-            .AsNoTrackingWithIdentityResolution()
+            .AsNoTracking()
             .ToListAsync();
     }
 

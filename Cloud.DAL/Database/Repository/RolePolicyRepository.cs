@@ -16,7 +16,7 @@ public class RolePolicyRepository : IRolePolicyRepository
     public async Task<RolePolicy?> Get(Guid roleId, Guid policyId)
     {
         return await _db.RolePolicies
-            .AsNoTrackingWithIdentityResolution()
+            .AsNoTracking()
             .FirstOrDefaultAsync(i => i.RoleId == roleId && i.PolicyId == policyId);
     }
 

@@ -16,7 +16,10 @@ public static class RepositoryCollectionExtension
         services.AddScoped<IRoleRepository, RoleRepository>();
         
         services.AddScoped<IUserRoleRepository, UserRoleRepository>();
-
+        services.AddScoped(typeof(IDirectoryRepository), typeof(DirectoryRepository));
+        
+        services.AddScoped(typeof(ICompanyRepository), typeof(CompanyRepository));
+        
         services.AddDbContext<DatabaseContext>();
 
         return services;

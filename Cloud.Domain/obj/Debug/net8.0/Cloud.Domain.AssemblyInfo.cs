@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Cloud.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d30a76e915bf1ad7b2c507ca4b3314555a9afa12")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+381ef943df4789509d7277d8f3130eef73a71b6d")]
 [assembly: System.Reflection.AssemblyProductAttribute("Cloud.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Cloud.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

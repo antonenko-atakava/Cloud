@@ -16,7 +16,7 @@ public class UserRoleRepository : IUserRoleRepository
     public async Task<UserRole?> Get(Guid userId, Guid roleId)
     {
         return await _db.UserRoles
-            .AsNoTrackingWithIdentityResolution()
+            .AsNoTracking()
             .FirstOrDefaultAsync(i => i.UserId == userId && i.RoleId == roleId);
     }
 

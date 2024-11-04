@@ -16,21 +16,21 @@ public class RoleRepository : IRoleRepository
     public async Task<Role?> Get(Guid id)
     {
         return await _db.Roles
-            .AsNoTrackingWithIdentityResolution()
+            .AsNoTracking()
             .FirstOrDefaultAsync(i => i.Id == id);
     }
 
     public async Task<Role?> GetByName(string name)
     {
         return await _db.Roles
-            .AsNoTrackingWithIdentityResolution()
+            .AsNoTracking()
             .FirstOrDefaultAsync(i => i.Name == name);
     }
 
     public async Task<IEnumerable<Role>> SelectAll()
     {
         return await _db.Roles
-            .AsNoTrackingWithIdentityResolution()
+            .AsNoTracking()
             .ToListAsync();
     }
 

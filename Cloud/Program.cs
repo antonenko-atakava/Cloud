@@ -1,10 +1,17 @@
+using System.Reflection;
 using Cloud.Auth;
 using Cloud.DAL.Database;
 using Cloud.DAL.Extension;
 using Cloud.Extension;
+using Cloud.Filter;
 using Cloud.Middleware;
 using Cloud.Service.Extension;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Controllers;
+using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
 
 namespace Cloud;
@@ -17,8 +24,8 @@ public class Program
 
         builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(option =>
         {
-            option.LoginPath = "/auth/login";
-            option.AccessDeniedPath = "/auth/forbidden";
+            option.LoginPath = null;
+            option.AccessDeniedPath = null;
             option.Events = new CustomCookieAuthenticationEvents();
         });
 
@@ -31,7 +38,7 @@ public class Program
 
             options.DefaultPolicy = options.GetPolicy("default")!;
         });
-        
+
         builder.Services.AddHttpContextAccessor();
 
         builder.Services.AddRepository();
@@ -39,11 +46,17 @@ public class Program
 
         builder.Services.AddCloudService();
         builder.Services.AddValidatorRegistry();
+        
+        builder.Services.BackgroundServiceCollection();
 
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
 
-        builder.Services.AddControllers();
+        builder.Services.AddControllers(options =>
+        {
+            var i = 0;
+            options.Filters.Add<ValidateModelStateActionFilter>();
+        });
 
         var app = builder.Build();
 
@@ -51,7 +64,7 @@ public class Program
         await app.UseAuthorizationAsync();
 
         app.UseStaticFiles();
-        
+
         app.UseCors(corsPolicyBuilder =>
         {
             corsPolicyBuilder.WithOrigins();
@@ -59,7 +72,7 @@ public class Program
             corsPolicyBuilder.AllowAnyMethod();
             corsPolicyBuilder.AllowCredentials();
         });
-        
+
         if (app.Environment.IsDevelopment())
         {
             app.UseSwagger();
@@ -71,6 +84,7 @@ public class Program
         //     var dbContext = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
         //     await dbContext.Database.MigrateAsync();
         // }
+
         app.UseMiddleware<ExceptionMiddleware>();
 
         app.UseHttpsRedirection();

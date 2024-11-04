@@ -13,4 +13,6 @@ public class User
     public DateTime Modified { get; set; }
     public bool IsSuperUser { get; set; }
     public virtual ICollection<UserRole>? UserRoles { get; set; }
+    public virtual ICollection<UserCompany>? UserCompany { get; set; }
+    public virtual ICollection<CustomDirectory>? Directories { get; set; }
 }

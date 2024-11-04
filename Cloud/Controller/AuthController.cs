@@ -34,13 +34,14 @@ public class AuthController : MainController
 
         await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
-        return Ok("Вы усешно зарегестрированы");
+        return Ok("Вы усешно вошли в аккаунт");
     }
 
     [HttpGet]
     [Authorize]
     public async Task<IActionResult> GetUserInfo()
     {
+        
         var identity = User.Identities.FirstOrDefault(i =>
             i.AuthenticationType == CookieAuthenticationDefaults.AuthenticationScheme);
 
